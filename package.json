@@ -1,6 +1,6 @@
 {
   "name": "primedia-search-args",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Converts a string into search arguments.",
   "main": "index.js",
   "author": "Wayne Ashley Berry <wayne@wearenext.co.za>",
