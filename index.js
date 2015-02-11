@@ -1,7 +1,6 @@
 var merge = require('lodash.merge');
 
-var PRIMARY_DELIMITER = ' ';
-var SECONDARY_DELIMITER = ':';
+var pattern = /([a-z]+):([\w-]+|"(?:\\"|[^"])+")/g;
 
 /**
  * @arg {String} input
@@ -19,8 +18,6 @@ module.exports = function(input, defaults) {
     defaults = {};
   }
 
-  var terms = input.split(PRIMARY_DELIMITER);
-
   var searchTerms = [];
   var topicId = [];
   var topicName = [];
@@ -29,59 +26,64 @@ module.exports = function(input, defaults) {
   var contactable = null;
   var deceased = null;
 
-  terms.forEach(function(term, index) {
-    var parts = term.split(SECONDARY_DELIMITER);
+  var matches;
+  var unmatched = '' + input;
 
-    if (term.length === 0) {
-      return;
-    }
+  while ((matches = pattern.exec(input)) !== null) {
+    var key = matches[1];
+    var value = matches[2].replace(/\"/g, '');
 
-    if (parts.length === 1) {
-      searchTerms.push(term);
-      return;
-    }
+    if (key && value) {
 
-    if (parts[0] === 'direction' && parts[1] === 'a-z') {
-      args.direction = 'asc';
-    }
+      unmatched = unmatched.replace(matches[0], '');
 
-    if (parts[0] === 'direction' && parts[1] === 'z-a') {
-      args.direction = 'desc';
-    }
-
-    if (parts[0] === 'is' && parts[1] === 'contactable') {
-      contactable = true;
-    }
-
-    if (parts[0] === 'not' && parts[1] === 'contactable') {
-      contactable = false;
-    }
-
-    if (parts[0] === 'is' && parts[1] === 'deceased') {
-      deceased = true;
-    }
-
-    if (parts[0] === 'not' && parts[1] === 'deceased') {
-      deceased = false;
-    }
-
-    if (parts[0] === 'topic' && parts[1].length > 0) {
-      if (parts[1].match(/\d+/)) {
-        topicId.push(parseInt(parts[1]));
-      } else {
-        topicName.push(parts[1]);
+      if (key === 'direction' && value === 'a-z') {
+        args.direction = 'asc';
       }
-    }
 
-    if (parts[0] === 'language' && parts[1].length > 0) {
-      if (parts[1].match(/\d+/)) {
-        languageId.push(parseInt(parts[1]));
-      } else {
-        languageName.push(parts[1]);
+      if (key === 'direction' && value === 'z-a') {
+        args.direction = 'desc';
       }
+
+      if (key === 'is' && value === 'contactable') {
+        contactable = true;
+      }
+
+      if (key === 'not' && value === 'contactable') {
+        contactable = false;
+      }
+
+      if (key === 'is' && value === 'deceased') {
+        deceased = true;
+      }
+
+      if (key === 'not' && value === 'deceased') {
+        deceased = false;
+      }
+
+      if (key === 'topic' && value.length > 0) {
+        if (value.match(/\d+/)) {
+          topicId.push(parseInt(value));
+        } else {
+          topicName.push(value);
+        }
+      }
+
+      if (key === 'language' && value.length > 0) {
+        if (value.match(/\d+/)) {
+          languageId.push(parseInt(value));
+        } else {
+          languageName.push(value);
+        }
+      }
+
     }
 
-  });
+  }
+
+  if (unmatched.trim().length > 0) {
+    searchTerms = unmatched.trim().split(' ');
+  }
 
   if (searchTerms.length > 0) {
     args.search = {terms: searchTerms};
@@ -105,18 +107,22 @@ module.exports = function(input, defaults) {
   }
 
   if (topicId.length > 0) {
+    topicId.sort();
     args.filter.topic_id = topicId;
   }
 
   if (topicName.length > 0) {
+    topicName.sort();
     args.filter.topic_name = topicName;
   }
 
   if (languageId.length > 0) {
+    languageId.sort();
     args.filter.language_id = languageId;
   }
 
   if (languageName.length > 0) {
+    languageName.sort();
     args.filter.language_name = languageName;
   }
 

@@ -2,7 +2,7 @@ var args = require('./index');
 
 var examples = [
   'Wayne Ashley Berry',
-  'topic:Typography',
+  'topic:Typography topic:"Robot Wars"',
   'is:contactable language:1 language:English Shawn',
   'not:contactable direction:a-z',
   'direction:z-a is:deceased'

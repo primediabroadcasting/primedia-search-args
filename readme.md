@@ -39,13 +39,14 @@ args('Wayne Ashley Berry');
 ---
 
 ```javascript
-args('topic:Typography');
+args('topic:Typography topic:"Robot Wars"');
 ```
 
 ```json
 {
   "filter": {
     "topic_name": [
+      "Robot Wars",
       "Typography"
     ]
   }
