@@ -1,5 +1,5 @@
 {
-  "name": "primedia-search-args",
+  "name": "@primediabroadcasting/search-args",
   "version": "1.1.0",
   "description": "Converts a string into search arguments.",
   "main": "index.js",

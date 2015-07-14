@@ -2,19 +2,18 @@
 
 # Primedia Search Args
 
-[![npm](https://img.shields.io/npm/v/primedia-search-args.svg?style=flat)](https://www.npmjs.com/package/primedia-search-args)
-[![Build Status](https://travis-ci.org/we-are-next/primedia-search-args.svg)](https://travis-ci.org/we-are-next/primedia-search-args)
-[![Dependency Status](https://david-dm.org/we-are-next/primedia-search-args/status.svg?style=flat)](https://david-dm.org/we-are-next/primedia-search-args#info=dependencies)
-[![devDependency Status](https://david-dm.org/we-are-next/primedia-search-args/dev-status.svg?style=flat)](https://david-dm.org/we-are-next/primedia-search-args#info=devDependencies)
+[![npm](https://img.shields.io/npm/v/@primediabroadcasting/search-args.svg?style=flat)](https://www.npmjs.com/package/@primediabroadcasting/search-args)
+[![Dependency Status](https://david-dm.org/primediabroadcasting/primedia-search-args/status.svg?style=flat)](https://david-dm.org/primediabroadcasting/primedia-search-args#info=dependencies)
+[![devDependency Status](https://david-dm.org/we-are-next/primedia-search-args/dev-status.svg?style=flat)](https://david-dm.org/primediabroadcasting/primedia-search-args#info=devDependencies)
 
 ## Installation
 
 ```sh
-❯ npm install --save primedia-search-args
+❯ npm install --save @primediabroadcasting/search-args
 ```
 
 ```javascript
-var args = require('primedia-search-args');
+var args = require('@primediabroadcasting/search-args');
 args('...');
 ```
 
