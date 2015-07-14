@@ -1,6 +1,6 @@
 {
   "name": "@primediabroadcasting/search-args",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Converts a string into search arguments.",
   "main": "index.js",
   "author": "Wayne Ashley Berry <wayne@wearenext.co.za>",
